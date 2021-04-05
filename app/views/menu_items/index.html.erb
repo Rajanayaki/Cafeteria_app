@@ -1,0 +1,14 @@
+<h1> Menu Items of </h1>
+<section class="MenuCategories-Form">
+    <%= form_with(url:"/menu_categories" , method:"post") do %>
+        <%= text_field_tag("menu_category_name","",class:'AddMenuCategory-text',placeholder: "what's new?") %>
+        <input class="AddMenuCategory-button" type="submit" value="Add">
+    <% end %>
+</section>
+<section class="MenuCategories-Display">
+    <% MenuCategory.all.each do |category| %>
+        <li class="CategoryItem">
+             <%= category.name %>
+        </li>
+    <% end %>
+</section>

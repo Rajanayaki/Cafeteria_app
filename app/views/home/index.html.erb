@@ -1,0 +1,13 @@
+
+    <% if current_user.nil? %> 
+        <p class="home-text"> Welcome , Kindly sign in to order! </p>
+        <%= link_to new_user_session_path, class: 'login-button' do %> Sign in <% end %>
+    <% else %> 
+        <p class="home-text"> You are logged in ! </p>
+        <%= link_to dashboard_path, class: 'login-button' do %> 
+            Go to App 
+        <% end %>
+        <%= link_to destroy_user_session_path, class: 'login-button'  , method: :delete do %>
+            Log out 
+        <% end %>
+    <% end %>

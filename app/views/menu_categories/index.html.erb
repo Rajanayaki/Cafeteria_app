@@ -1,14 +1,22 @@
-<h1> CATEGORIES </h1>
-<section class="MenuCategories-Form">
-    <%= form_with(url:"/menu_categories" , method:"post") do %>
-        <%= text_field_tag("menu_category_name","",class:'AddMenuCategory-text',placeholder: "what's new?") %>
-        <input class="AddMenuCategory-button" type="submit" value="Add">
-    <% end %>
-</section>
-<section class="MenuCategories-Display">
-    <% MenuCategory.all.each do |category| %>
-        <li class="CategoryItem">
-             <%= category.name %> 
-        </li>
-    <% end %>
-</section>
+<div class="categories-section container-fluid">
+    <h1 class="title"> CATEGORIES </h1>
+        <div class="row">
+            <div class="col-md-9 MenuCategories-Display">
+                <% MenuCategory.all.each do |category| %>
+                <ul>
+                    <li class="CategoryItem">
+                        <%= link_to category.category_name, menu_category_path(category.id) %>
+                    </li>
+                </ul>
+                <% end %>
+            </div>
+            <div class="col-md-2 MenuCategories-Form">
+                <% if current_user.superadmin_role? %>
+                    <%= form_with(url:"/menu_categories" , method:"post") do %>
+                        <%= text_field_tag("menu_category_name","",class:'AddMenuCategory-text',placeholder: "what's new?") %>
+                        <input class="AddMenuCategory-button" type="submit" value="Add">
+                    <% end %>
+                <% end %>
+            </div>
+        </div>
+</div>

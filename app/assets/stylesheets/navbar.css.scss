@@ -1,0 +1,30 @@
+.container-fluid {
+    width:100%;
+}.navbar {
+    width:100%;
+    height:70px;
+}
+.navbar a{
+    color:white !important;
+}
+.navbar a:hover{
+    color:black !important;
+}
+.navbar-right{
+    padding-right:90px;
+}
+.navbar-custom{
+    background-color:#e94560;
+}
+.navbar-brand {
+    font-size: 25px !important;
+    font-family: sans-serif;
+    font-style: italic;
+}    
+
+#mynavbar li {
+    padding: 10px;
+    display: inline;
+    font-size:2rem;
+  }
+

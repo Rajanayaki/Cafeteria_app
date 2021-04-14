@@ -56,3 +56,8 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "pg", "~> 1.2"
+gem 'rails_admin', '~> 2.0'
+gem 'cancancan'
+gem 'bootstrap-sass'
+gem "jquery-rails", "~> 4.3"
+

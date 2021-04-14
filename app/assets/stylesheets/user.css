@@ -1,6 +1,5 @@
 body{
     font-family:Sans-serif;
-    max-width:600px;
     margin-top:32px;
     margin-bottom:0;
     margin-left:auto;
@@ -25,7 +24,7 @@ body{
     margin-left: 50px;
     padding:6px;
     width:250px;
-    height:20px;
+    height:35px;
 }
 
 .FormInput-label{
@@ -46,16 +45,20 @@ body{
     border-radius: 4px;
     margin-left: 50px;
     margin-top:20px;
-    
-
 }
 
 .CheckInput-label{
     font-size:15px;
-    margin-top: 10px;
+    margin-top: 5px;
+
 }
 
 .CheckInput{
-    margin-left:50px;
-    margin-top:10px;
+    margin-left:45px !important;
+    display:inline !important;
 }
+.UsersNew{
+    position: absolute;
+    top: 20%;
+    left:40%;
+} 

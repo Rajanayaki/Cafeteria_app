@@ -1,0 +1,24 @@
+<h1> <%= role %> </h1>
+    <div class="row">
+        <div class="col-md-7 MenuCategories-Display">
+            <table class="CategoryItem">
+                <tr>
+                    <th>User Id</th>
+                    <th>Email</th>
+                    <th>Joined Date</th>
+                </tr>
+                <% ids.each do |ids_id| %> 
+                    <% @user = User.find(ids_id) %>   
+                    <tr>
+                        <td> <%= @user.id %> </td>
+                        <td> <%= @user.email %> </td>
+                        <td> <%= @user.created_at.strftime("%F") %> </td>
+                    </tr>    
+                <% end %>
+            </table>   
+            <%= form_with(url:"/addusers" , method:"post") do %>
+                <input class="AddMenuCategory-button" type="submit" value="Add">
+            <% end %>          
+        </div>
+    </div>   
+</div>

@@ -7,5 +7,13 @@ Rails.application.routes.draw do
   resources :order_items
   resources :orders
   resources :carts
+  resources :users
+  get 'order_status' => 'orders#order_status' , as: :order_status
+  get 'pending_orders' => 'orders#pending_orders' ,as: :pending_orders
+  get 'delivered_orders' => 'orders#delivered_orders', as: :delivered_orders
+  get 'customers' => 'users#customers', as: :customers 
+  get 'clerks' => 'users#clerks', as: :clerks 
+  get 'admins' => 'users#admins', as: :admins 
+  get 'addusers' => 'users#addusers',as: :newusers 
   get 'dashboard' => 'dashboard#index', as: :dashboard
 end

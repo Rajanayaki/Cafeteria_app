@@ -10,8 +10,6 @@ class Ability
     if user.superadmin_role?
       can :manage, :all
       can :access, :rails_admin
-    else
-      can :read, User
     end
     #
     # The first argument to `can` is the action you are giving the user

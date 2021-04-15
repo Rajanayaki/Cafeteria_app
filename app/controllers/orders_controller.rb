@@ -37,6 +37,21 @@ class OrdersController < ApplicationController
             redirect_to "/"
         end
     end  
+
+    def order_status
+        render "order_status"
+    end
+
+    def pending_orders
+        @not_delivered = Order.where(status: "False").pluck(:id)
+        render "pending" , locals: { pending_orders_id: @not_delivered }
+    end
+    
+    def delivered_orders
+        @delivered_orders = Order.where(status: "Delivered").pluck(:id)
+        render  "delivered" , locals: {delivered_orders_id: @delivered_orders}
+    end 
+
     def update
         id=params[:order_id]
         order = Order.find(id)

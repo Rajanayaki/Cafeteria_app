@@ -1,6 +1,24 @@
 <h1> Order History </h1>
     <div class="row">
         <div class="col-md-7 MenuCategories-Display">
+        <% if current_user.superadmin_role? %>
+            <% @orders = Order.count %>
+            <% @pending = Order.where(status: "False").pluck(:id) %>
+            <% @delivered= Order.where(status: "Delivered").pluck(:id) %>
+            <table class="CategoryItem">
+                <tr>
+                    <th>Orders </th>
+                    <th>Pending</th>
+                    <th>Delivered</th>
+                </tr>
+
+                    <tr>
+                        <td> <%= link_to @orders , orders_path %> </td>
+                        <td> <%= link_to @pending.count , pending_orders_path  %> </td>
+                        <td> <%= link_to @delivered.count , delivered_orders_path  %> </td>
+                    </tr>    
+            </table>    
+        <% else %>
             <% @order_history_id = Order.where(:user_id => current_user.id).order(created_at: :DESC).pluck(:id)%>
             <table class="CategoryItem">
                 <tr>
@@ -25,6 +43,7 @@
                         <td> <%= @order.created_at.strftime("%F") %> </td>
                     </tr>    
                 <% end %>
-            </table>              
+            </table>  
+        <% end %>            
         </div>   
     </div> 

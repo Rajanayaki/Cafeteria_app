@@ -1,0 +1,23 @@
+<h1> CartItems </h1>
+    <div class="row">
+        <div class="col-md-7 MenuCategories-Display">
+            <% @customers = User.where(superadmin_role: false).where(user_role: true ).pluck(:id) %>
+            <% @clerks = User.where(superadmin_role: false).where(clerks_role: true).pluck(:id) %>
+            <% @admins = User.where(superadmin_role: true).pluck(:id) %> 
+            <table class="CategoryItem">
+                <tr>
+                    <th>Customers </th>
+                    <th>Clerks</th>
+                    <th>Admins </th>
+                </tr>
+
+                    <tr>
+                        <td> <%= link_to @customers.count , customers_path %> </td>
+                        <td> <%= link_to @clerks.count , clerks_path  %> </td>
+                        <td> <%= link_to @admins.count , admins_path  %> </td>
+                    </tr>    
+            </table>  
+            
+        </div>
+    </div>   
+</div>

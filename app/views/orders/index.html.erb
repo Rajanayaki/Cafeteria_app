@@ -1,0 +1,30 @@
+<h1> Order History </h1>
+    <div class="row">
+        <div class="col-md-7 MenuCategories-Display">
+            <% @order_history_id = Order.where(:user_id => current_user.id).order(created_at: :DESC).pluck(:id)%>
+            <table class="CategoryItem">
+                <tr>
+                    <th>Order Id </th>
+                    <th>NetPay </th>
+                    <th>Status</th>
+                    <th>Date</th>
+                </tr>
+                <% @order_history_id.each do |order_id| %> 
+                    <% @order = Order.find(order_id) %>   
+                    <tr>
+                        <td> <%= link_to @order.id , order_items_path(:order_id => @order.id) %> </td>
+                        <td> <%= @order.netpay %> </td>
+                        <td> <%= @order.status %> 
+                        <% if current_user.superadmin_role %>
+                            <%= form_with(url:"/orders/#{@order.id}",method:"put") do %>
+                                <%= hidden_field_tag 'order_id' , @order.id %>
+                                <input class="AddMenuCategory-button" type="submit" value="Change">
+                            <% end %>
+                        <% end %>
+                        </td>
+                        <td> <%= @order.created_at.strftime("%F") %> </td>
+                    </tr>    
+                <% end %>
+            </table>              
+        </div>   
+    </div> 

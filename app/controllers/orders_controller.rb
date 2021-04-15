@@ -31,12 +31,24 @@ class OrdersController < ApplicationController
         order.netpay=netpay
         order_db=order.save
         if order_db
-            redirect_back(fallback_location: root_path)
+            redirect_to orders_path
         else
             flash[:error]=order_db.errors.full_messages.join(", ")
             redirect_to "/"
         end
     end  
+    def update
+        id=params[:order_id]
+        order = Order.find(id)
+        order.status= order.status== "False" ? "Delivered" : "False"
+        if order.save
+            redirect_back(fallback_location: root_path)
+        else
+            flash[:error]=order.errors.full_messages.join(", ")
+            redirect_to "/"
+        end
+    end
+
 
     def destroy
         id=params[:id]

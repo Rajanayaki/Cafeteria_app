@@ -42,4 +42,5 @@ RailsAdmin.config do |config|
     warden.authenticate! scope: :user
   end
   config.current_user_method(&:current_user)
+  config.authorize_with :cancancan
 end

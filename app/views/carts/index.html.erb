@@ -16,9 +16,10 @@
                         <td> <%= cart_item.item_name %> </td>
                         <td> <%= cart_item.item_price%> </td>
                         <td> 
-                            <%= form_with(url:"/cart", method: "post") do %>
+                            <%= form_with(url:"/carts/#{cart_item.id}", method: "put") do %>
                                 <%= text_field_tag("menu_item_quantity","",class:'AddMenuItem-text',value: cart_item.item_quantity) %>
                                 <%= hidden_field_tag 'menu_item_id' , cart_item.id %>
+                                <input class="AddMenuCategory-button" type="submit" value="Change">
                             <% end %>
                             
                         </td>

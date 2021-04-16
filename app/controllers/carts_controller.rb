@@ -1,4 +1,5 @@
 class CartsController < ApplicationController
+
     def index
         render "index"
     end
@@ -21,6 +22,19 @@ class CartsController < ApplicationController
             redirect_to "/"
         end
     end  
+
+    def update
+        id=params[:menu_item_id]
+        quantity=params[:menu_item_quantity]
+        cart_item=CartItem.find(id)
+        cart_item.item_quantity = quantity
+        if cart_item.save
+            flash[:notice]= "Update success"
+        else
+            flash[:error]=cart_item.errors.full_messages.join(", ")
+        end
+        redirect_back(fallback_location: root_path)
+    end
 
     def destroy
         id=params[:id]

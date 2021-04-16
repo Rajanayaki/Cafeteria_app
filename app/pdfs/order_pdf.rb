@@ -1,6 +1,4 @@
-class OrderPdf < Prawn::Document
-    before_action :check_as_admin
-    before_action :check_as_clerk
+class OrderPdf < Prawn::Document    
     def initialize(order,view)
         super(top_margin: 70)
         @order= order

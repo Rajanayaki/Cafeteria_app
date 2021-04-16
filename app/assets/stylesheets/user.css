@@ -11,11 +11,14 @@ body{
     margin-bottom:20px;
     margin-left: 125px;
     font-size: 30px;
+    position:relative;
+    top: 100px;
+    left: 33%;
 }
 
 .Form-section{
     margin-bottom:20px;
-    margin-left: 150px;
+    margin-left: 100px;
 }
 
 .Form-Input{
@@ -60,5 +63,5 @@ body{
 .UsersNew{
     position: absolute;
     top: 20%;
-    left:40%;
+    left:35%;
 } 

@@ -16,8 +16,7 @@ class MenuItemsController < ApplicationController
             redirect_back(fallback_location: root_path)
         else
             flash[:error]=new_menu_item.errors.full_messages.join(", ")
-
-            redirect_to "/"
+            redirect_back(fallback_location: root_path)
         end
     end  
 
@@ -33,7 +32,7 @@ class MenuItemsController < ApplicationController
             redirect_back(fallback_location: root_path)
         else
             flash[:error]=menu_item.errors.full_messages.join(", ")
-            redirect_to "/"
+            redirect_back(fallback_location: root_path)
         end    
     end
 

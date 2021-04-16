@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+    before_action :check_as_admin
+    
+
     def index
         render "index"
     end
@@ -30,7 +33,8 @@ class UsersController < ApplicationController
         if new_user.save
             redirect_to users_path
         else
-            redirect_to "/"
+            flash[:error]=new_user.errors.full_messages.join(", ")
+            redirect_back(fallback_location: root_path)
         end 
 
     end

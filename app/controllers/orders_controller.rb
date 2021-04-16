@@ -1,4 +1,8 @@
 class OrdersController < ApplicationController
+    before_action :check_as_admin , only: [:pending_orders,:delivered_orders,:update]
+    before_action :check_as_clerk , only: [:pending_orders,:delivered_orders,:update]
+
+
     def index
         render "index"
     end

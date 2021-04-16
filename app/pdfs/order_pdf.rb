@@ -1,4 +1,5 @@
 class OrderPdf < Prawn::Document
+    before_action :check_as_admin, check_as_clerk
     def initialize(order,view)
         super(top_margin: 70)
         @order= order
@@ -24,7 +25,9 @@ class OrderPdf < Prawn::Document
     end
 
     def line_items_rows
-        [["Item","Qty","Unit Price","Total Price"]] +
+        [["Item","Qty","Unit Price","Total P \
+        ];lK
+        Jhrice"]] +
         @order_items_id.map do |order_item|
             item = OrderItem.find(order_item)
             [item.item_name,item.quantity,price(item.item_price),price(item.total_price)]

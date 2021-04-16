@@ -37,9 +37,17 @@ class OrdersController < ApplicationController
             redirect_to "/"
         end
     end  
-
-    def order_status
-        render "order_status"
+    def show 
+        @order = Order.find(params[:order_id])
+        respond_to do |format|
+            format.html
+            format.pdf do
+              pdf = OrderPdf.new(@order, view_context)
+              send_data pdf.render, filename: "order_#{@order.id}.pdf",
+                                    type: "application/pdf",
+                                    disposition: "inline" 
+            end
+        end
     end
 
     def pending_orders
@@ -64,11 +72,11 @@ class OrdersController < ApplicationController
         end
     end
 
-
     def destroy
         id=params[:id]
         order_item=OrderItem.find(id)
         order_item.destroy
         redirect_back(fallback_location: root_path)
     end
+
 end

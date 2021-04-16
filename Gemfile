@@ -60,4 +60,6 @@ gem 'rails_admin', '~> 2.0'
 gem 'cancancan'
 gem 'bootstrap-sass'
 gem "jquery-rails", "~> 4.3"
-
+gem 'prawn'
+gem 'prawn-table', '~> 0.1.0'
+gem 'number_to_indian_currency'

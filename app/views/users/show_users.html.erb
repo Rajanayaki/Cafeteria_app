@@ -15,10 +15,32 @@
                         <td> <%= @user.created_at.strftime("%F") %> </td>
                     </tr>    
                 <% end %>
-            </table>   
-            <%= form_with(url:"/addusers" , method:"post") do %>
-                <input class="AddMenuCategory-button" type="submit" value="Add">
-            <% end %>          
+            </table>      
+        </div>
+        <div class="col-md-3 MenuCategories-Display">
+        <% if role != "customers" %>
+        <%= form_with(url:"/add_new_users" , method:"post") do %>
+            <div class="form-section">
+              <%= label_tag "Email" %>  <br>
+              <%= text_field_tag("email","",class:'AddMenuCategory-text',placeholder: "@gmail.com") %>
+            </div>
+      
+            <div class="form-section">
+              <br><%= label_tag "Password"%> <br>  
+              <%= password_field_tag("password","",class:'AddMenuCategory-text',placeholder: "minimum 6 characters") %> 
+            </div>
+      
+          <div class="form-section">
+              <br><%= label_tag "Role"%>   <br>
+              <%= radio_button_tag(:role,"clerk_role") %>
+              <%= label_tag(:clerks_role, "Clerk") %>
+              <%= radio_button_tag(:role, "superadmin_role") %>
+              <%= label_tag(:superadmin_role, "Admin") %>
+          </div>
+          <br><input class="AddMenuCategory-button" type="submit" value="Add">
+      
+          <% end %>   
+        <% end %>    
         </div>
     </div>   
 </div>

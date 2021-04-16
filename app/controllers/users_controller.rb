@@ -17,9 +17,21 @@ class UsersController < ApplicationController
         @admins = User.where(superadmin_role: true ).pluck(:id)
         render "show_users" , locals: { role: "admins" , ids: @admins}
     end
-
-    def addusers 
-        render "add_new_users"
+    def add_new_users
+        email = params[:email]
+        password = params[:password]
+        new_user= User.new(email: email , password: password)
+        if params[:role]=="clerk_role"
+            new_user.clerks_role = true 
+            new_user.user_role = false
+        else
+            new_user.superadmin_role = true
+        end
+        if new_user.save
+            redirect_to users_path
+        else
+            redirect_to "/"
+        end 
 
     end
 end

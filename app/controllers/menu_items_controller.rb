@@ -21,6 +21,22 @@ class MenuItemsController < ApplicationController
         end
     end  
 
+    def update
+        menu_item_id=params[:menu_item_id]
+        menu_item=MenuItem.find(menu_item_id)
+        if menu_item.deactivate==false
+            menu_item.deactivate= true
+        else
+            menu_item.deactivate= false
+        end 
+        if menu_item.save
+            redirect_back(fallback_location: root_path)
+        else
+            flash[:error]=menu_item.errors.full_messages.join(", ")
+            redirect_to "/"
+        end    
+    end
+
     def destroy
         id=params[:id]
         menu_item=MenuItem.find(id)

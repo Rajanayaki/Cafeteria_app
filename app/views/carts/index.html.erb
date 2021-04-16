@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-7 MenuCategories-Display">
             <% @cart_id = Cart.find_by(user_id:current_user.id) %>
-            <% @cart = CartItem.where(card_id: @cart_id) %>
+            <% @cart = CartItem.where(card_id: @cart_id).pluck(:id) %>
             <table class="CategoryItem">
                 <tr>
                     <th>Menu</th>
@@ -10,7 +10,8 @@
                     <th>Quantity</th>
                     <th>     </th>
                 </tr>
-                <% @cart.each do |cart_item| %>       
+                <% @cart.each do |cart_item_id| %> 
+                    <% cart_item = CartItem.find(cart_item_id) %>     
                     <tr>
                         <td> <%= cart_item.item_name %> </td>
                         <td> <%= cart_item.item_price%> </td>

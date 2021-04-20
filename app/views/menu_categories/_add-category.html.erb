@@ -1,0 +1,6 @@
+<% if current_user.superadmin_role? %>
+    <%= form_with(url:"/menu_categories" , method:"post") do %>
+        <%= text_field_tag("menu_category_name","",class:'AddMenuCategory-text',placeholder: "what's new?") %>
+        <input class="AddMenuCategory-button" type="submit" value="Add">
+    <% end %>
+<% end %>

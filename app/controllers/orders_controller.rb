@@ -8,12 +8,12 @@ class OrdersController < ApplicationController
     end
 
     def create
-        cart=Cart.find_by(user_id: current_user.id) 
-        order=Order.new(user_id: current_user.id,status: "False")
+        cart=Cart.find_by("user_id=?", current_user.id) 
+        order=Order.new("user_id=?", current_user.id,"status=?", "False")
         order.save 
         netpay= 0   
-        while CartItem.find_by(card_id: cart.id)
-            cart_item=CartItem.find_by(card_id: cart.id) 
+        while CartItem.find_by("card_id= ?",cart.id)
+            cart_item=CartItem.find_by("card_id= ?", cart.id) 
             order_items= OrderItem.new(
                     item_id:cart_item[:item_id],
                     quantity:cart_item[:item_quantity],
@@ -55,12 +55,12 @@ class OrdersController < ApplicationController
     end
 
     def pending_orders
-        @not_delivered = Order.where(status: "False").pluck(:id)
+        @not_delivered = Order.where("status=?","False").pluck(:id)
         render "pending" , locals: { pending_orders_id: @not_delivered }
     end
     
     def delivered_orders
-        @delivered_orders = Order.where(status: "Delivered").pluck(:id)
+        @delivered_orders = Order.where("status=?","Delivered").pluck(:id)
         render  "delivered" , locals: {delivered_orders_id: @delivered_orders}
     end 
 

@@ -1,29 +1,29 @@
-<h1> Order History </h1>
-    <div class="row">
-        <div class="col-md-7 MenuCategories-Display">
-            <table class="CategoryItem">
+<div class="row">
+    <div class="col-md-7 MenuCategories-Display">
+        <h1 class="title"> Order History </h1>
+        <table class="CategoryItem">
+                <tr>
+                    <th>Order Id </th>
+                    <th>NetPay </th>
+                    <th>Status</th>
+                    <th>Date</th>
+                </tr>
+                <% delivered_orders_id.each do |delivered_id| %>
+                    <% @order = Order.find(delivered_id) %>   
                     <tr>
-                        <th>Order Id </th>
-                        <th>NetPay </th>
-                        <th>Status</th>
-                        <th>Date</th>
-                    </tr>
-                    <% delivered_orders_id.each do |delivered_id| %>
-                        <% @order = Order.find(delivered_id) %>   
-                        <tr>
-                            <td> <%= link_to @order.id , order_items_path(:order_id => @order.id) %> </td>
-                            <td> <%= @order.netpay %> </td>
-                            <td> <%= @order.status %> 
-                            <% if current_user.superadmin_role || current_user.clerks_role %>
-                                <%= form_with(url:"/orders/#{@order.id}",method:"put") do %>
-                                    <%= hidden_field_tag 'order_id' , @order.id %>
-                                    <input class="AddMenuCategory-button" type="submit" value="Change">
-                                <% end %>
+                        <td> <%= link_to @order.id , order_items_path(:order_id => @order.id) %> </td>
+                        <td> <%= @order.netpay %> </td>
+                        <td> <%= @order.status %> 
+                        <% if current_user.superadmin_role || current_user.clerks_role %>
+                            <%= form_with(url:"/orders/#{@order.id}",method:"put") do %>
+                                <%= hidden_field_tag 'order_id' , @order.id %>
+                                <input class="AddMenuCategory-button" type="submit" value="Change">
                             <% end %>
-                            </td>
-                            <td> <%= @order.created_at.strftime("%F") %> </td>
-                        </tr>    
-                    <% end %>
-            </table>              
-        </div>   
-    </div> 
+                        <% end %>
+                        </td>
+                        <td> <%= @order.created_at.strftime("%F") %> </td>
+                    </tr>    
+                <% end %>
+        </table>              
+    </div>   
+</div> 

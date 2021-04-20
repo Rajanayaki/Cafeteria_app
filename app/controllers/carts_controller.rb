@@ -9,7 +9,7 @@ class CartsController < ApplicationController
         item_id=params[:menu_item_id] 
         item=MenuItem.find(item_id)
         if Cart.exists?(user_id: current_user.id)
-            cart=Cart.find_by(user_id: current_user.id)
+            cart=Cart.find_by("user_id=?", current_user.id)
         else
             cart=Cart.new(user_id:current_user.id)
             cart.save

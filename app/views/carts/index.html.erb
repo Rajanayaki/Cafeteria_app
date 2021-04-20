@@ -2,36 +2,7 @@
     <div class="row">
         <div class="col-md-7 MenuCategories-Display">
             <% @cart_id = Cart.find_by(user_id:current_user.id) %>
-            <% @cart = CartItem.where(card_id: @cart_id).pluck(:id) %>
-            <table class="CategoryItem">
-                <tr>
-                    <th>Menu</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>     </th>
-                </tr>
-                <% @cart.each do |cart_item_id| %> 
-                    <% cart_item = CartItem.find(cart_item_id) %>     
-                    <tr>
-                        <td> <%= cart_item.item_name %> </td>
-                        <td> <%= cart_item.item_price%> </td>
-                        <td> 
-                            <%= form_with(url:"/carts/#{cart_item.id}", method: "put") do %>
-                                <%= text_field_tag("menu_item_quantity","",class:'AddMenuItem-text',value: cart_item.item_quantity) %>
-                                <%= hidden_field_tag 'menu_item_id' , cart_item.id %>
-                                <input class="AddMenuCategory-button" type="submit" value="Change">
-                            <% end %>
-                            
-                        </td>
-                        <td>
-                                <%= form_with(url:"/carts/#{cart_item.id}",method:"delete") do %>
-                                    <%= hidden_field_tag 'menu_item_id' , cart_item.id %>
-                                    <input class="AddMenuCategory-button" type="submit" value="Delete">
-                                <% end %>
-                        </td>
-                    </tr>    
-                <% end %>
-            </table>
+            <%= render partial: "cart-section" , locals: {cart_id: @cart_id } %>
             <%= form_with(url:"/orders",method:"post") do %>
                 <input class="AddMenuCategory-button" type="submit" value="Order">
             <% end %>

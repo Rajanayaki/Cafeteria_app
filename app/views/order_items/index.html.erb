@@ -1,25 +1,23 @@
-<h1> Ordered Items History </h1>
-    <div class="row">
-        <div class="col-md-7 MenuCategories-Display">
-            <% @order_items_history_id = OrderItem.where(:order_id => @order_id).pluck(:id)%>
-            <table class="CategoryItem">
+<div class="row">
+    <div class="col-md-7 MenuCategories-Display">
+        <h1 class="title"> Ordered Items History </h1>
+        <% @order_items_history_id = OrderItem.where(:order_id => @order_id).pluck(:id)%>
+        <table class="CategoryItem">
+            <tr>
+                <th>Order Item </th>
+                <th>Item Price </th>
+                <th>Quantity</th>
+                <th>Total Price</th>
+            </tr>
+            <% @order_items_history_id.each do |order_item_id| %> 
+                <% @order_item = OrderItem.find(order_item_id) %>   
                 <tr>
-                    <th>Order Item </th>
-                    <th>Item Price </th>
-                    <th>Quantity</th>
-                    <th>Total Price</th>
-                </tr>
-                <% @order_items_history_id.each do |order_item_id| %> 
-                    <% @order_item = OrderItem.find(order_item_id) %>   
-                    <tr>
-                        <td> <%= @order_item.item_name%> </td>
-                        <td> <%= @order_item.item_price %> </td>
-                        <td> <%= @order_item.quantity %> </td>
-                        <td> <%= @order_item.total_price %> </td>
-                    </tr>    
-                <% end %>
-            </table>
-            
-              
-    </div>   
+                    <td> <%= @order_item.item_name%> </td>
+                    <td> <%= @order_item.item_price %> </td>
+                    <td> <%= @order_item.quantity %> </td>
+                    <td> <%= @order_item.total_price %> </td>
+                </tr>    
+            <% end %>
+        </table>            
+</div>   
 </div> 

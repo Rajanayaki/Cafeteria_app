@@ -7,17 +7,17 @@ class UsersController < ApplicationController
     end
 
     def customers
-        @customers = User.where(superadmin_role: false).where(user_role: true ).pluck(:id)
+        @customers = User.where("superadmin_role= ? ", false).where("user_role= ?" ,  true ).pluck(:id)
         render "show_users" , locals: { role: "customers" , ids: @customers}
     end
 
     def clerks
-        @clerks = User.where(clerks_role: true).where(superadmin_role: false).pluck(:id)
+        @clerks = User.where("clerks_role= ?",true).where("superadmin_role= ?", false).pluck(:id)
         render "show_users" , locals: { role: "clerks" , ids: @clerks}
     end
 
     def admins
-        @admins = User.where(superadmin_role: true ).pluck(:id)
+        @admins = User.where("superadmin_role= ?", true ).pluck(:id)
         render "show_users" , locals: { role: "admins" , ids: @admins}
     end
     def add_new_users

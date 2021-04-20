@@ -54,13 +54,13 @@ class OrdersController < ApplicationController
         end
     end
 
-    def pending_orders
-        @not_delivered = Order.where("status=?","False").pluck(:id)
+    def pending
+        @not_delivered = Order.pending_orders
         render "pending" , locals: { pending_orders_id: @not_delivered }
     end
     
-    def delivered_orders
-        @delivered_orders = Order.where("status=?", "Delivered").pluck(:id)
+    def delivered
+        @delivered_orders = Order.delivered_orders
         render  "delivered" , locals: {delivered_orders_id: @delivered_orders}
     end 
 

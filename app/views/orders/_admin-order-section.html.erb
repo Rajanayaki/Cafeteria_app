@@ -1,7 +1,7 @@
 <% @orders = Order.count %>
 <% orders_list_id= Order.pluck(:id) %>
-<% @pending = Order.where(status: "False").pluck(:id) %>
-<% @delivered= Order.where(status: "Delivered").pluck(:id) %>
+<% @pending = Order.pending_orders %>
+<% @delivered= Order.delivered_orders %>
 <table class="CategoryItem">
     <tr>
         <th>Orders </th>
@@ -11,8 +11,8 @@
 
     <tr>
         <td> <%= link_to @orders , orders_path %> </td>
-        <td> <%= link_to @pending.count , pending_orders_path  %> </td>
-        <td> <%= link_to @delivered.count , delivered_orders_path  %> </td>
+        <td> <%= link_to @pending.count , pending_path  %> </td>
+        <td> <%= link_to @delivered.count , delivered_path  %> </td>
     </tr>    
 </table>    
 <table class="CategoryItem">

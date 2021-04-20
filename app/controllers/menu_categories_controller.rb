@@ -15,10 +15,10 @@ class MenuCategoriesController < ApplicationController
         end
     end
 
-    def show()
+    def show
         @category_id = (params[:id]).to_i
         @category_object = MenuCategory.find(@category_id)
         @category_name = @category_object.category_name
-        render "menu_items/index"
+        render "menu_items/index" 
     end
 end

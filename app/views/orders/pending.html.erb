@@ -11,7 +11,7 @@
                 <% pending_orders_id.each do |pending_id| %>
                     <% @order = Order.find(pending_id) %>   
                     <tr>
-                        <td> <%= link_to @order.id , order_items_path(:order_id => @order.id) %> </td>
+                        <td> <%= link_to @order.id , order_items_path("order_id: ?", @order.id) %> </td>
                         <td> <%= @order.netpay %> </td>
                         <td> <%= @order.status %> 
                         <% if current_user.superadmin_role || current_user.clerks_role %>

@@ -24,9 +24,7 @@ class OrderPdf < Prawn::Document
     end
 
     def line_items_rows
-        [["Item","Qty","Unit Price","Total P \
-        ];lK
-        Jhrice"]] +
+        [["Item","Qty","Unit Price","Total Price"]] +
         @order_items_id.map do |order_item|
             item = OrderItem.find(order_item)
             [item.item_name,item.quantity,price(item.item_price),price(item.total_price)]

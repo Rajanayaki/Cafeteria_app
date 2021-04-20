@@ -9,7 +9,7 @@ class OrdersController < ApplicationController
 
     def create
         cart=Cart.find_by("user_id=?", current_user.id) 
-        order=Order.new("user_id=?", current_user.id,"status=?", "False")
+        order=Order.new(user_id: current_user.id,status: "False")
         order.save 
         netpay= 0   
         while CartItem.find_by("card_id= ?",cart.id)
@@ -60,7 +60,7 @@ class OrdersController < ApplicationController
     end
     
     def delivered_orders
-        @delivered_orders = Order.where("status=?","Delivered").pluck(:id)
+        @delivered_orders = Order.where("status=?", "Delivered").pluck(:id)
         render  "delivered" , locals: {delivered_orders_id: @delivered_orders}
     end 
 

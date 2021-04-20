@@ -22,3 +22,5 @@ Things you may want to cover:
 * Deployment instructions
 * Admin username = testadminone@gmail.com
 * Password = testadminone
+* Clerk username = testclerkone@gmail.com
+* Password= testclerkone

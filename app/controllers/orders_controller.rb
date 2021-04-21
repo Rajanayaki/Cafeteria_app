@@ -33,7 +33,7 @@ class OrdersController < ApplicationController
         order.netpay=netpay
         order_db=order.save!
         order_items.order_id=order.id
-
+        order_items.save!
         if order_db
             redirect_to orders_path
         else

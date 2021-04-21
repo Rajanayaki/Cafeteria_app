@@ -1,7 +1,7 @@
 <% @orders = Order.count %>
-<% orders_list_id= Order.pluck(:id) %>
-<% @pending = Order.where(status: "False").pluck(:id) %>
-<% @delivered= Order.where(status: "Delivered").pluck(:id) %>
+<% orders_list= Order.all %>
+<% @pending = Order.pending_orders_list %>
+<% @delivered= Order.delivered_orders_list %>
 <table class="CategoryItem">
     <tr>
         <th>Orders </th>
@@ -23,22 +23,21 @@
             <th>Date</th>
             <th>Invoice </th>
         </tr>
-        <% orders_list_id.each do |orders_id| %>
-            <% @order = Order.find(orders_id) %>   
+        <% orders_list.each do |order| %>
             <tr>
-                <td> <%= link_to @order.id , order_items_path(order_id: @order.id) %> </td>
-                <td> <%= @order.netpay %> </td>
-                <td> <%= @order.status %> 
+                <td> <%= link_to order.id , order_items_path(order_id: order.id) %> </td>
+                <td> <%= order.netpay %> </td>
+                <td> <%= order.status %> 
                 <% if current_user.superadmin_role || current_user.clerks_role %>
-                    <%= form_with(url:"/orders/#{@order.id}",method:"put") do %>
-                        <%= hidden_field_tag 'order_id' , @order.id %>
+                    <%= form_with(url:"/orders/#{order.id}",method:"put") do %>
+                        <%= hidden_field_tag 'order_id' , order.id %>
                         <input class="AddMenuCategory-button" type="submit" value="Change">
                     <% end %>
                 <% end %>
                 </td>
-                <td> <%= @order.created_at.strftime("%F") %> </td>
+                <td> <%= order.created_at.strftime("%F") %> </td>
                 <td> 
-                <%= link_to "Invoice (PDF)", order_path(@order,order_id:@order.id ,format: "pdf") %>
+                <%= link_to "Invoice (PDF)", order_path(order,order_id:order.id ,format: "pdf") %>
 
                 </td>
             </tr>    

@@ -4,7 +4,7 @@
         <% if current_user.superadmin_role? || current_user.clerks_role? %>
             <%= render partial: "admin-order-section" %>
         <% else %>
-            <% @order_history_id= Order.where(:user_id => current_user.id).order(created_at: :DESC).pluck(:id) %>
+            <% @order_history_id = Order.where(:user_id => current_user.id).order(created_at: :DESC).pluck(:id)%>
             <table class="CategoryItem">
                 <tr>
                     <th>Order Id </th>

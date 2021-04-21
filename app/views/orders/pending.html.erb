@@ -8,7 +8,6 @@
                     <th>Status</th>
                     <th>Date</th>
                 </tr>
-
                 <% pending_orders_id.each do |pending_id| %>
                     <% @order = Order.find(pending_id) %>   
                     <tr>

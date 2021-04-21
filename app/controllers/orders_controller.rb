@@ -9,8 +9,7 @@ class OrdersController < ApplicationController
 
     def create
         cart=Cart.find_by("user_id=?", current_user.id) 
-        order=Order.new("user_id=?", current_user.id,"status=?", "False")
-        order.save 
+        order=Order.new(user_id: current_user.id,status: "False")
         netpay= 0   
         while CartItem.find_by("card_id= ?",cart.id)
             cart_item=CartItem.find_by("card_id= ?", cart.id) 
@@ -19,7 +18,6 @@ class OrdersController < ApplicationController
                     quantity:cart_item[:item_quantity],
                     total_price:cart_item[:item_price] * cart_item[:item_quantity],
                     item_name:cart_item[:item_name],
-                    order_id:order.id,
                     item_price: cart_item[:item_price]
                     )
             netpay+= cart_item[:item_price] * cart_item[:item_quantity]
@@ -33,7 +31,10 @@ class OrdersController < ApplicationController
             CartItem.destroy(cart_item[:id])
         end
         order.netpay=netpay
-        order_db=order.save
+        order_db=order.save!
+        order_items.order_id=order.id
+        order_items.save!
+
         if order_db
             redirect_to orders_path
         else
@@ -54,21 +55,20 @@ class OrdersController < ApplicationController
         end
     end
 
-    def pending
-        @not_delivered = Order.pending_orders
+    def pending_orders
+        @not_delivered = Order.where("status=?","False").pluck(:id)
         render "pending" , locals: { pending_orders_id: @not_delivered }
     end
     
-<<<<<<< HEAD
+
     def delivered
         @delivered_orders = Order.delivered_orders
-=======
+    end
     def delivered_orders
         @delivered_orders = Order.where("status=?","Delivered").pluck(:id)
-<<<<<<< HEAD
->>>>>>> parent of 3189b97... Fixed bug in orderitems display
-=======
->>>>>>> parent of 3189b97... Fixed bug in orderitems display
+    end
+    def delivered_orders
+        @delivered_orders = Order.where("status=?", "Delivered").pluck(:id)
         render  "delivered" , locals: {delivered_orders_id: @delivered_orders}
     end 
 

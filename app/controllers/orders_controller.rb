@@ -11,6 +11,7 @@ class OrdersController < ApplicationController
         cart=Cart.find_by("user_id=?", current_user.id) 
         order=Order.new(user_id: current_user.id,status: "False")
         netpay= 0   
+        order.save!
         while CartItem.find_by("card_id= ?",cart.id)
             cart_item=CartItem.find_by("card_id= ?", cart.id) 
             order_items= OrderItem.new(
@@ -21,7 +22,8 @@ class OrdersController < ApplicationController
                     item_price: cart_item[:item_price]
                     )
             netpay+= cart_item[:item_price] * cart_item[:item_quantity]
-            order_status= order_items.save 
+            order_items.order_id=order.id
+            order_status= order_items.save!
             if order_status
 
             else
@@ -32,8 +34,7 @@ class OrdersController < ApplicationController
         end
         order.netpay=netpay
         order_db=order.save!
-        order_items.order_id=order.id
-        order_items.save!
+        
         if order_db
             redirect_to orders_path
         else
@@ -55,13 +56,13 @@ class OrdersController < ApplicationController
     end
 
     def pending_orders
-        @not_delivered = Order.where("status=?","False").pluck(:id)
+        @not_delivered = Order.pending_orders_list
         render "pending" , locals: { pending_orders_id: @not_delivered }
     end
     
 
     def delivered_orders
-        @delivered_orders = Order.where("status=?", "Delivered").pluck(:id)
+        @delivered_orders = Order.delivered_orders_list
         render  "delivered" , locals: {delivered_orders_id: @delivered_orders}
     end 
 

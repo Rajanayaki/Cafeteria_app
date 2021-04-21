@@ -5,4 +5,7 @@ class CartItem < ActiveRecord::Base
     validates :item_price , presence:true
     validates :item_quantity, presence:true
     validates :card_id , presence:true 
+    def self.cart_items_list(cart_id)
+        all.where(:card_id => cart_id)
+    end
 end

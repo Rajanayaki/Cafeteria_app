@@ -8,20 +8,19 @@
                     <th>Status</th>
                     <th>Date</th>
                 </tr>
-                <% pending_orders_id.each do |pending_id| %>
-                    <% @order = Order.find(pending_id) %>   
+                <% pending_orders_id.each do |pending_order| %>
                     <tr>
-                        <td> <%= link_to @order.id , order_items_path(order_id: @order.id) %> </td>
-                        <td> <%= @order.netpay %> </td>
-                        <td> <%= @order.status %> 
+                        <td> <%= link_to pending_order.id , order_items_path(order_id: pending_order.id) %> </td>
+                        <td> <%= pending_order.netpay %> </td>
+                        <td> <%= pending_order.status %> 
                         <% if current_user.superadmin_role || current_user.clerks_role %>
-                            <%= form_with(url:"/orders/#{@order.id}",method:"put") do %>
-                                <%= hidden_field_tag 'order_id' , @order.id %>
+                            <%= form_with(url:"/orders/#{pending_order.id}",method:"put") do %>
+                                <%= hidden_field_tag 'order_id' , pending_order.id %>
                                 <input class="AddMenuCategory-button" type="submit" value="Change">
                             <% end %>
                         <% end %>
                         </td>
-                        <td> <%= @order.created_at.strftime("%F") %> </td>
+                        <td> <%= pending_order.created_at.strftime("%F") %> </td>
                     </tr>    
                 <% end %>
         </table>              

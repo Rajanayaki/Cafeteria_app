@@ -9,7 +9,7 @@ class OrdersController < ApplicationController
 
     def create
         cart=Cart.find_by("user_id=?", current_user.id) 
-        order=Order.new(user_id: current_user.id,status: "False")
+        order=Order.new("user_id=?", current_user.id,"status=?", "False")
         order.save 
         netpay= 0   
         while CartItem.find_by("card_id= ?",cart.id)
@@ -59,8 +59,13 @@ class OrdersController < ApplicationController
         render "pending" , locals: { pending_orders_id: @not_delivered }
     end
     
+<<<<<<< HEAD
     def delivered
         @delivered_orders = Order.delivered_orders
+=======
+    def delivered_orders
+        @delivered_orders = Order.where("status=?","Delivered").pluck(:id)
+>>>>>>> parent of 3189b97... Fixed bug in orderitems display
         render  "delivered" , locals: {delivered_orders_id: @delivered_orders}
     end 
 

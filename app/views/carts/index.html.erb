@@ -1,8 +1,7 @@
 <h1> CartItems </h1>
     <div class="row">
         <div class="col-md-7 MenuCategories-Display">
-            <% @cart_id = Cart.find_by(user_id:current_user.id) %>
-            <%= render partial: "cart-section" , locals: {cart_id: @cart_id } %>
+            <%= render partial: "cart-section" , locals: {cart_id: @cart.id } %>
             <%= form_with(url:"/orders",method:"post") do %>
                 <input class="AddMenuCategory-button" type="submit" value="Order">
             <% end %>

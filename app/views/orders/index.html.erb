@@ -4,7 +4,6 @@
         <% if current_user.superadmin_role? || current_user.clerks_role? %>
             <%= render partial: "admin-order-section" %>
         <% else %>
-            <% @order_history_id = Order.where(:user_id => current_user.id).order(created_at: :DESC).pluck(:id)%>
             <table class="CategoryItem">
                 <tr>
                     <th>Order Id </th>
@@ -12,13 +11,12 @@
                     <th>Status</th>
                     <th>Date</th>
                 </tr>
-                <% @order_history_id.each do |order_id| %> 
-                    <% @order = Order.find(order_id) %>   
+                <% @orders.each do |order| %> 
                     <tr>
-                        <td> <%= link_to @order.id ,order_items_path(order_id: @order.id) %> </td>
-                        <td> <%= @order.netpay %> </td>
-                        <td> <%= @order.status %> 
-                        <td> <%= @order.created_at.strftime("%F") %> </td>
+                        <td> <%= link_to order.id ,order_items_path(order_id: order.id) %> </td>
+                        <td> <%= order.netpay %> </td>
+                        <td> <%= order.status %> 
+                        <td> <%= order.created_at.strftime("%F") %> </td>
                     </tr>    
                 <% end %>
             </table>  

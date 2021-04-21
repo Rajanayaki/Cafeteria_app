@@ -1,6 +1,7 @@
 class CartsController < ApplicationController
 
     def index
+        @cart=Cart.of_user(current_user)
         render "index"
     end
 

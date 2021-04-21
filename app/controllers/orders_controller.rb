@@ -4,6 +4,7 @@ class OrdersController < ApplicationController
 
 
     def index
+        @orders= Order.of_user(current_user)
         render "index"
     end
 

@@ -3,5 +3,4 @@ class OrderItemsController < ApplicationController
         @order_id = params[:order_id]
         render "index"
     end
-
 end

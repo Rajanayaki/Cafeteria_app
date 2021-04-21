@@ -4,4 +4,12 @@ class Order < ActiveRecord::Base
     validates :user_id , presence:true 
     validates :netpay , presence:true
     validates :status , presence:true
+
+    def self.pending_orders_list
+        all.where("status=?","False")
+    end
+
+    def self.delivered_orders_list
+        all.where("status=?", "Delivered")
+    end
 end

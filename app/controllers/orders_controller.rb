@@ -33,7 +33,6 @@ class OrdersController < ApplicationController
         order.netpay=netpay
         order_db=order.save!
         order_items.order_id=order.id
-        order_items.save!
 
         if order_db
             redirect_to orders_path
@@ -61,12 +60,6 @@ class OrdersController < ApplicationController
     end
     
 
-    def delivered
-        @delivered_orders = Order.delivered_orders
-    end
-    def delivered_orders
-        @delivered_orders = Order.where("status=?","Delivered").pluck(:id)
-    end
     def delivered_orders
         @delivered_orders = Order.where("status=?", "Delivered").pluck(:id)
         render  "delivered" , locals: {delivered_orders_id: @delivered_orders}

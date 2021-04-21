@@ -65,6 +65,9 @@ class OrdersController < ApplicationController
 =======
     def delivered_orders
         @delivered_orders = Order.where("status=?","Delivered").pluck(:id)
+<<<<<<< HEAD
+>>>>>>> parent of 3189b97... Fixed bug in orderitems display
+=======
 >>>>>>> parent of 3189b97... Fixed bug in orderitems display
         render  "delivered" , locals: {delivered_orders_id: @delivered_orders}
     end 

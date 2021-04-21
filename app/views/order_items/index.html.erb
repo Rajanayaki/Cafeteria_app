@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-7 MenuCategories-Display">
         <h1 class="title"> Ordered Items History </h1>
-        <% @order_items_history_id = OrderItem.where(:order_id=>@order_id).pluck(:id)%>
+        <% @order_items_history_id = OrderItem.where(:order_id=> order_id).pluck(:id)%>
         <table class="CategoryItem">
             <tr>
                 <th>Order Item </th>
